@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "ai-gateway-server"
+version = "0.1.0"
+description = ""
+authors = ["Phạm Tân Tị <kurokid0206@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.110.1"
+uvicorn = "^0.29.0"
+celery = "^5.3.6"
+redis = "^5.0.3"
+websocket = "^0.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
