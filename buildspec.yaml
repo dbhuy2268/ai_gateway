@@ -23,7 +23,7 @@ spec:
         - containerPort: 8000
 ---
 
-apiVersion: services/v1
+apiVersion: v1
 kind: Service
 metadata:
   name: fast-api-service
@@ -37,7 +37,7 @@ spec:
 ---
 
 
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: fast-api-hpa
@@ -45,7 +45,8 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: fast-api-deployment
+    name: fast-api
+    namespace: default
   minReplicas: 1
   maxReplicas: 10
   behavior:
