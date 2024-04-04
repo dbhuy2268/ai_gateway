@@ -46,7 +46,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: fast-api
+    name: fast-api-deployment
   minReplicas: 1
   maxReplicas: 10
   behavior:
