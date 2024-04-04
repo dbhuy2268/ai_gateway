@@ -17,7 +17,7 @@ spec:
         image: public.ecr.aws/t3n3x1c2/pub-rd-images:latest
         resources:
           limits:
-            memory: "256Mi"
+            memory: "128Mi"
             cpu: "500m"
         ports:
         - containerPort: 8000
