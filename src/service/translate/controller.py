@@ -1,7 +1,10 @@
 import json
+import logging
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+
 from src.utils.websocket import ConnectionManager
-from src.utils.celery import celery_task
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/translate",
@@ -9,15 +12,13 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-import logging
 
-logger = logging.getLogger(__name__)
 manager = ConnectionManager()
 
 
-@router.get("/")
-def health_check():
-    celery_task.send_task("tasks.health_check")
+@router.get("/test")
+async def test():
+    await manager.broadcast("Test message")
     return {"status": 200, "message": "OK"}
 
 
@@ -36,11 +37,3 @@ async def websocket_endpoint(websocket: WebSocket, client_id: str):
     except WebSocketDisconnect:
         manager.disconnect(websocket)
         await manager.broadcast(f"Client {client_id} left the chat")
-    # except Exception as e:
-    #     print(e)
-
-
-@router.get("/test")
-async def test():
-    await manager.broadcast("Test message")
-    return {"status": 200, "message": "OK"}
